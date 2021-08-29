@@ -37,16 +37,13 @@ const AddOrUpdate = (props) => {
   const [createCustomer, { data: CreatedData }] = useMutation(CREATE_CUSTOMER);
   const [updateCustomer, { data: UpdatedData }] = useMutation(UPDATE_CUSTOMER);
 
-
-
   useEffect(() => {
     if (data) {
-      setState(data.customerByid)
+      setState(data.customerByid);
     }
-  }, [data])
+  }, [data]);
 
-  console.log(props)
-
+  console.log(props);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -54,18 +51,26 @@ const AddOrUpdate = (props) => {
     //debugger;
 
     if (CustomerId) {
-
-      updateCustomer({ variables: { Id: CustomerId, CustomerData: { name: state.name, age: state.age, email: state.email, contactNumber: state.contactNumber, address: state.address } } });
+      updateCustomer({
+        variables: {
+          Id: CustomerId,
+          CustomerData: {
+            name: state.name,
+            age: state.age,
+            email: state.email,
+            contactNumber: state.contactNumber,
+            address: state.address,
+          },
+        },
+      });
       UpdateMessage();
       window.location.href = "/";
-    }
-    else {
+    } else {
       createCustomer({ variables: { Customer: state } });
       AddedMessage();
       window.location.href = "/";
     }
   };
-
 
   function validationChecking(event) {
     const form = event.currentTarget;
